@@ -1,0 +1,23 @@
+[project]
+name = "y"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=6.0",
+    "django-allauth[socialaccount]>=65.13.1",
+    "django-browser-reload>=1.21.0",
+    "django-cotton>=2.6.0",
+    "django-environ>=0.12.0",
+    "django-vite>=3.1.0",
+    "whitenoise>=6.11.0",
+]
+
+[dependency-groups]
+dev = []
+
+prod = [
+    "gunicorn>=23.0.0",
+    "psycopg2-binary>=2.9.11",
+]

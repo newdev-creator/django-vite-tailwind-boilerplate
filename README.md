@@ -1,0 +1,1 @@
+# django-vite-tailwind-boilerplat

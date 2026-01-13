@@ -1,7 +1,7 @@
 [project]
-name = "y"
+name = "django-vite-tailwind-boilerplate"
 version = "0.1.0"
-description = "Add your description here"
+description = "Starting boilerplate"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,11 +11,14 @@ dependencies = [
     "django-cotton>=2.6.0",
     "django-environ>=0.12.0",
     "django-vite>=3.1.0",
+    "pillow>=12.1.0",
     "whitenoise>=6.11.0",
 ]
 
 [dependency-groups]
-dev = []
+dev = [
+    "faker>=40.1.0",
+]
 
 prod = [
     "gunicorn>=23.0.0",

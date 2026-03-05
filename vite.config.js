@@ -5,20 +5,22 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [tailwindcss()],
   base: "/static/",
-  root: resolve(__dirname, "./src"),
+  root: resolve(__dirname, "./"),
   build: {
-    outDir: resolve(__dirname, "./src/static"),
-    emptyOutDir: false,
-    manifest: "manifest.json",
+    outDir: resolve(__dirname, "./static"),
+    emptyOutDir: true,
+    manifest: "true",
     rollupOptions: {
       input: {
-        index: resolve(__dirname, "./src/assets/index.js"),
-        style: resolve(__dirname, "./src/assets/style.css"),
+        index: resolve(__dirname, "./assets/main.js"),
+        style: resolve(__dirname, "./assets/style.css"),
       },
       output: {
-        entryFileNames: `js/[name]-bundle.js`,
-        assetFileNames: `css/[name].css`,
+        entryFileNames: "[name]-[hash].js",
+        chunkFileNames: "[name]-[hash].js",
+        assetFileNames: "[name]-[hash][extname]",
       },
     },
+    assetsDir: "",
   },
 });

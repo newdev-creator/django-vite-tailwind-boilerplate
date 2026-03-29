@@ -1,0 +1,203 @@
+<!--  cotton/calendar/index.html -->
+<!--
+  Props:
+    id              str   "calendar"   — ID unique de l'instance
+    name            str   "date"       — nom du champ hidden pour les formulaires
+    mode            str   "single"     — "single" | "range" | "multiple"
+    locale          str   ""           — ex: "fr", "en-US" (défaut: navigateur)
+    min_date        str   ""           — "YYYY-MM-DD"
+    max_date        str   ""           — "YYYY-MM-DD"
+    default_date    str   ""           — "YYYY-MM-DD"
+    caption_layout  str   "label"      — "label" | "dropdown"
+    show_outside_days bool true
+    class           str   ""           — classes CSS additionnelles sur le root
+-->
+
+
+<c-vars
+  id="calendar"
+  name="date"
+  mode="single"
+  locale=""
+  min_date=""
+  max_date=""
+  default_date=""
+  caption_layout="label"
+  show_outside_days="true"
+  class=""
+/>
+
+{% include "cotton/calendar/script.html" %}
+
+<div
+  data-slot="calendar"
+  x-data="calendarComponent({
+    id: '{{ id }}',
+    mode: '{{ mode }}',
+    locale: '{{ locale }}',
+    minDate: '{{ min_date }}',
+    maxDate: '{{ max_date }}',
+    defaultDate: '{{ default_date }}',
+    captionLayout: '{{ caption_layout }}',
+    showOutsideDays: {{ show_outside_days }},
+  })"
+  x-init="init()"
+  class="group/calendar bg-background w-fit select-none {{ class }}"
+  style="--cell-size: 1.75rem; --cell-radius: 0.375rem; padding: 0.5rem;"
+>
+  <!-- Hidden input — valeur soumise au formulaire Django -->
+  <input type="hidden" :name="'{{ name }}'" :value="selectedValue" />
+
+  <div class="flex flex-col gap-4">
+
+    <!-- ── Header : navigation + caption ───────────────────── -->
+    <div
+      class="relative flex w-full items-center justify-between gap-1"
+      style="height: var(--cell-size);"
+    >
+      <!-- Bouton précédent -->
+      <button
+        type="button"
+        @click="prevMonth()"
+        :aria-disabled="isPrevDisabled()"
+        :class="isPrevDisabled() && 'opacity-50 pointer-events-none'"
+        class="inline-flex items-center justify-center rounded-[var(--cell-radius)] bg-transparent text-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
+        style="width: var(--cell-size); height: var(--cell-size); padding: 0;"
+        aria-label="Mois précédent"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <!-- Caption centre -->
+      <div class="absolute inset-x-0 flex items-center justify-center pointer-events-none"
+           style="height: var(--cell-size);">
+
+        <!-- Layout: label simple -->
+        <template x-if="captionLayout === 'label'">
+          <span class="text-sm font-medium" x-text="currentMonthLabel()"></span>
+        </template>
+
+        <!-- Layout: dropdowns mois/année -->
+        <template x-if="captionLayout === 'dropdown'">
+          <div class="flex items-center gap-1.5 text-sm font-medium pointer-events-auto">
+
+            <!-- Dropdown mois -->
+            <div class="relative rounded-[var(--cell-radius)]">
+              <span class="flex items-center gap-1 text-sm cursor-pointer px-1"
+                    x-text="currentMonthShort()">
+              </span>
+              <select
+                class="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                @change="setMonth($event.target.value)"
+              >
+                <template x-for="(m, i) in monthNames()" :key="i">
+                  <option :value="i" :selected="i === viewDate.getMonth()" x-text="m"></option>
+                </template>
+              </select>
+            </div>
+
+            <!-- Dropdown année -->
+            <div class="relative rounded-[var(--cell-radius)]">
+              <span class="flex items-center gap-1 text-sm cursor-pointer px-1"
+                    x-text="viewDate.getFullYear()">
+              </span>
+              <select
+                class="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                @change="setYear($event.target.value)"
+              >
+                <template x-for="y in yearRange()" :key="y">
+                  <option :value="y" :selected="y === viewDate.getFullYear()" x-text="y"></option>
+                </template>
+              </select>
+            </div>
+
+          </div>
+        </template>
+
+      </div>
+
+      <!-- Bouton suivant -->
+      <button
+        type="button"
+        @click="nextMonth()"
+        :aria-disabled="isNextDisabled()"
+        :class="isNextDisabled() && 'opacity-50 pointer-events-none'"
+        class="inline-flex items-center justify-center rounded-[var(--cell-radius)] bg-transparent text-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
+        style="width: var(--cell-size); height: var(--cell-size); padding: 0;"
+        aria-label="Mois suivant"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Grille calendrier -->
+    <table class="w-full border-collapse" role="grid">
+
+      <!-- En-têtes jours de la semaine -->
+      <thead>
+        <tr class="flex">
+          <template x-for="day in weekdayNames()" :key="day">
+            <th
+              scope="col"
+              class="flex-1 text-[0.8rem] font-normal text-muted-foreground text-center"
+              style="height: var(--cell-size); line-height: var(--cell-size);"
+              x-text="day"
+            ></th>
+          </template>
+        </tr>
+      </thead>
+
+      <!-- Semaines -->
+      <tbody>
+        <template x-for="(week, wi) in calendarWeeks()" :key="wi">
+          <tr class="mt-2 flex w-full">
+            <template x-for="(day, di) in week" :key="di">
+              <td
+                class="group/day relative aspect-square h-full flex-1 p-0 text-center"
+                :class="tdClass(day)"
+                :data-today="isToday(day)"
+                :data-outside="isOutside(day)"
+                :data-selected="isSelected(day)"
+                :data-range-start="isRangeStart(day)"
+                :data-range-end="isRangeEnd(day)"
+                :data-range-middle="isRangeMiddle(day)"
+                role="gridcell"
+              >
+                <!-- Cellule vide (outside days masqués) -->
+                <template x-if="!day"></template>
+
+                <!-- Bouton jour -->
+                <template x-if="day">
+                  <button
+                    type="button"
+                    :data-day="_fmt(day)"
+                    :data-selected-single="isSelectedSingle(day)"
+                    :data-range-start="isRangeStart(day)"
+                    :data-range-end="isRangeEnd(day)"
+                    :data-range-middle="isRangeMiddle(day)"
+                    :disabled="isDisabled(day)"
+                    @click="selectDay(day)"
+                    @keydown.enter.prevent="selectDay(day)"
+                    @keydown.space.prevent="selectDay(day)"
+                    :class="btnClass(day)"
+                    style="min-width: var(--cell-size);"
+                    x-text="day.getDate()"
+                  ></button>
+                </template>
+
+              </td>
+            </template>
+          </tr>
+        </template>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>

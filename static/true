@@ -1,0 +1,20 @@
+{
+  "assets/main.js": {
+    "file": "index-aoWz9QJC.js",
+    "name": "index",
+    "src": "assets/main.js",
+    "isEntry": true,
+    "css": [
+      "style-BgqhGPOF.css"
+    ]
+  },
+  "assets/style.css": {
+    "file": "style-BgqhGPOF.css",
+    "src": "assets/style.css",
+    "isEntry": true,
+    "name": "style",
+    "names": [
+      "style.css"
+    ]
+  }
+}

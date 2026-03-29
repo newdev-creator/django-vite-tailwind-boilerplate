@@ -1,0 +1,636 @@
+<header
+    class="sticky top-0 z-(--header-z-index) flex min-h-(--header-height) w-full shrink-0 items-center justify-center border-b border-dashed backdrop-blur-[8px] bg-background/60"
+>
+    <div
+        class="mx-auto flex h-full w-full max-w-350 items-center border-dashed min-[1400px]:border-x min-[1800px]:max-w-384"
+    >
+        <div
+            class="flex w-full items-center justify-between px-4 max-lg:gap-4 sm:px-6 lg:px-8"
+        >
+            <a href="/"
+                ><div
+                    class="flex items-center gap-2.5 max-[550px]:[&amp;_span]:hidden"
+                >
+                    <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 328 329"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="size-8.5"
+                    >
+                        <rect
+                            y="0.5"
+                            width="328"
+                            height="328"
+                            rx="164"
+                            fill="black"
+                            class="dark:fill-white"
+                        ></rect>
+                        <path
+                            d="M165.018 72.3008V132.771C165.018 152.653 148.9 168.771 129.018 168.771H70.2288"
+                            stroke="white"
+                            stroke-width="20"
+                            class="dark:stroke-black"
+                        ></path>
+                        <path
+                            d="M166.627 265.241L166.627 204.771C166.627 184.889 182.744 168.771 202.627 168.771L261.416 168.771"
+                            stroke="white"
+                            stroke-width="20"
+                            class="dark:stroke-black"
+                        ></path>
+                        <line
+                            x1="238.136"
+                            y1="98.8184"
+                            x2="196.76"
+                            y2="139.707"
+                            stroke="white"
+                            stroke-width="20"
+                            class="dark:stroke-black"
+                        ></line>
+                        <line
+                            x1="135.688"
+                            y1="200.957"
+                            x2="94.3128"
+                            y2="241.845"
+                            stroke="white"
+                            stroke-width="20"
+                            class="dark:stroke-black"
+                        ></line>
+                        <line
+                            x1="133.689"
+                            y1="137.524"
+                            x2="92.5566"
+                            y2="96.3914"
+                            stroke="white"
+                            stroke-width="20"
+                            class="dark:stroke-black"
+                        ></line>
+                        <line
+                            x1="237.679"
+                            y1="241.803"
+                            x2="196.547"
+                            y2="200.671"
+                            stroke="white"
+                            stroke-width="20"
+                            class="dark:stroke-black"
+                        ></line></svg
+                    ><span class="text-xl font-semibold">shadcn/studio</span>
+                </div></a
+            >
+            <div
+                class="flex items-center justify-end gap-2 sm:gap-6 lg:justify-between"
+            >
+                <nav
+                    aria-label="Main"
+                    data-orientation="horizontal"
+                    dir="ltr"
+                    data-slot="navigation-menu"
+                    data-viewport="false"
+                    class="group/navigation-menu relative flex max-w-max flex-1 items-center justify-center max-[1440px]:hidden"
+                >
+                    <div style="position: relative">
+                        <ul
+                            data-orientation="horizontal"
+                            data-slot="navigation-menu-list"
+                            class="group flex flex-1 list-none items-center justify-center gap-4"
+                            dir="ltr"
+                        >
+                            <li
+                                data-slot="navigation-menu-item"
+                                class="relative"
+                            >
+                                <span
+                                    data-active="false"
+                                    data-slot="navigation-menu-link"
+                                    class="focus:text-accent-foreground focus-visible:ring-ring/50 [&amp;_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 text-sm transition-all outline-none focus-visible:outline-1 [&amp;_svg:not([class*='size-'])]:size-4 text-muted-foreground hover:text-foreground data-[active=true]:text-primary rounded-xs p-0 hover:bg-transparent focus:bg-transparent focus-visible:ring-2 data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent"
+                                    data-radix-collection-item=""
+                                    ><a href="/components">Components</a></span
+                                >
+                            </li>
+                            <li
+                                data-slot="navigation-menu-item"
+                                class="relative"
+                            >
+                                <span
+                                    data-active="false"
+                                    data-slot="navigation-menu-link"
+                                    class="focus:text-accent-foreground focus-visible:ring-ring/50 [&amp;_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 text-sm transition-all outline-none focus-visible:outline-1 [&amp;_svg:not([class*='size-'])]:size-4 text-muted-foreground hover:text-foreground data-[active=true]:text-primary rounded-xs p-0 hover:bg-transparent focus:bg-transparent focus-visible:ring-2 data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent"
+                                    data-radix-collection-item=""
+                                    ><a href="/blocks">Blocks</a></span
+                                >
+                            </li>
+                            <li
+                                data-slot="navigation-menu-item"
+                                class="relative"
+                            >
+                                <span
+                                    data-active="false"
+                                    data-slot="navigation-menu-link"
+                                    class="focus:text-accent-foreground focus-visible:ring-ring/50 [&amp;_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 text-sm transition-all outline-none focus-visible:outline-1 [&amp;_svg:not([class*='size-'])]:size-4 text-muted-foreground hover:text-foreground data-[active=true]:text-primary rounded-xs p-0 hover:bg-transparent focus:bg-transparent focus-visible:ring-2 data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent"
+                                    data-radix-collection-item=""
+                                    ><a href="/templates">Templates</a></span
+                                >
+                            </li>
+                            <li
+                                data-slot="navigation-menu-item"
+                                class="relative"
+                            >
+                                <span
+                                    data-active="false"
+                                    data-slot="navigation-menu-link"
+                                    class="focus:text-accent-foreground focus-visible:ring-ring/50 [&amp;_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 text-sm transition-all outline-none focus-visible:outline-1 [&amp;_svg:not([class*='size-'])]:size-4 text-muted-foreground hover:text-foreground data-[active=true]:text-primary rounded-xs p-0 hover:bg-transparent focus:bg-transparent focus-visible:ring-2 data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent"
+                                    data-radix-collection-item=""
+                                    ><a href="/figma">Figma</a></span
+                                >
+                            </li>
+                            <li
+                                data-slot="navigation-menu-item"
+                                class="relative"
+                            >
+                                <span
+                                    data-active="true"
+                                    data-slot="navigation-menu-link"
+                                    class="focus:text-accent-foreground focus-visible:ring-ring/50 [&amp;_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 text-sm transition-all outline-none focus-visible:outline-1 [&amp;_svg:not([class*='size-'])]:size-4 text-muted-foreground hover:text-foreground data-[active=true]:text-primary rounded-xs p-0 hover:bg-transparent focus:bg-transparent focus-visible:ring-2 data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent"
+                                    data-radix-collection-item=""
+                                    ><a href="/theme-generator"
+                                        >Theme Generator</a
+                                    ></span
+                                >
+                            </li>
+                            <li
+                                data-slot="navigation-menu-item"
+                                class="relative"
+                            >
+                                <button
+                                    id="radix-_R_339fj9b_-trigger-radix-_R_cr39fj9b_"
+                                    data-state="closed"
+                                    aria-expanded="false"
+                                    aria-controls="radix-_R_339fj9b_-content-radix-_R_cr39fj9b_"
+                                    data-slot="navigation-menu-trigger"
+                                    class="group focus:text-accent-foreground data-[state=open]:text-accent-foreground focus-visible:ring-ring/50 inline-flex w-max items-center justify-center text-sm transition-[color,box-shadow] outline-none focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 group text-muted-foreground hover:text-foreground [&amp;_li_[data-active=true]]:text-accent-foreground h-fit rounded-xs bg-transparent p-0 font-normal hover:bg-transparent focus:bg-transparent focus-visible:ring-2 data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:focus:bg-transparent"
+                                    data-radix-collection-item=""
+                                >
+                                    AI Tools<!-- -->
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-down relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m6 9 6 6 6-6"></path>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li
+                                data-slot="navigation-menu-item"
+                                class="relative"
+                            >
+                                <button
+                                    id="radix-_R_339fj9b_-trigger-radix-_R_er39fj9b_"
+                                    data-state="closed"
+                                    aria-expanded="false"
+                                    aria-controls="radix-_R_339fj9b_-content-radix-_R_er39fj9b_"
+                                    data-slot="navigation-menu-trigger"
+                                    class="group focus:text-accent-foreground data-[state=open]:text-accent-foreground focus-visible:ring-ring/50 inline-flex w-max items-center justify-center text-sm transition-[color,box-shadow] outline-none focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 group text-muted-foreground hover:text-foreground h-fit rounded-xs bg-transparent p-0 font-normal hover:bg-transparent focus:bg-transparent focus-visible:ring-2 data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:focus:bg-transparent"
+                                    data-radix-collection-item=""
+                                >
+                                    Resources<!-- -->
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-chevron-down relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m6 9 6 6 6-6"></path>
+                                    </svg>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="flex items-center gap-2 lg:gap-4">
+                    <div class="flex items-center gap-2">
+                        <button
+                            data-slot="sheet-trigger"
+                            data-variant="outline"
+                            data-size="icon"
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border shadow-xs size-9 cursor-pointer min-[1440px]:hidden"
+                            type="button"
+                            aria-haspopup="dialog"
+                            aria-expanded="false"
+                            aria-controls="radix-_R_2l39fj9b_"
+                            data-state="closed"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-menu size-5"
+                                aria-hidden="true"
+                            >
+                                <path d="M4 5h16"></path>
+                                <path d="M4 12h16"></path>
+                                <path d="M4 19h16"></path></svg
+                            ><span class="sr-only">Menu</span></button
+                        ><button
+                            data-slot="button"
+                            data-variant="outline"
+                            data-size="icon"
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border shadow-xs size-9"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-search"
+                                aria-hidden="true"
+                            >
+                                <path d="m21 21-4.34-4.34"></path>
+                                <circle cx="11" cy="11" r="8"></circle></svg
+                            ><span class="sr-only">Search</span>
+                        </button>
+                        <div
+                            data-slot="dialog-header"
+                            class="flex flex-col gap-2 text-center sm:text-left sr-only"
+                        >
+                            <h2
+                                id="radix-_R_14l39fj9bH1_"
+                                data-slot="dialog-title"
+                                class="text-lg leading-none font-semibold"
+                            >
+                                Search...
+                            </h2>
+                            <p
+                                id="radix-_R_14l39fj9bH2_"
+                                data-slot="dialog-description"
+                                class="text-muted-foreground text-sm"
+                            >
+                                Search for docs, blocks, components, and more.
+                            </p>
+                        </div>
+                        <button
+                            data-slot="button"
+                            data-variant="outline"
+                            data-size="icon"
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border shadow-xs size-9 cursor-pointer"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-moon-star"
+                                aria-hidden="true"
+                            >
+                                <path d="M18 5h4"></path>
+                                <path d="M20 3v4"></path>
+                                <path
+                                    d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+                                ></path></svg
+                            ><span class="sr-only">Toggle Theme</span></button
+                        ><button
+                            class="group animate-rainbow text-primary-foreground focus-visible:ring-ring/50 relative inline-flex size-9 items-center justify-center rounded-md border-2 border-transparent bg-[length:200%] [background-clip:padding-box,border-box,border-box] [background-origin:border-box] font-medium transition-colors focus-visible:ring-[3px] focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 before:animate-rainbow before:absolute before:bottom-[-20%] before:left-0 before:z-0 before:h-1/5 before:w-full before:bg-[linear-gradient(90deg,#ff4242,#a1ff42,#42a1ff,#42d0ff,#a142ff)] before:[filter:blur(calc(0.625*1rem))] bg-[linear-gradient(var(--primary),var(--primary)),linear-gradient(var(--primary)_30%,rgba(0,0,0,0)),linear-gradient(90deg,#ff4242,#a1ff42,#42a1ff,#42d0ff,#a142ff)] cursor-pointer"
+                            aria-label="Theme customizer"
+                            data-tour="theme-customizer"
+                            type="button"
+                            aria-haspopup="dialog"
+                            aria-expanded="false"
+                            aria-controls="radix-_R_8l39fj9b_"
+                            data-state="closed"
+                            data-slot="sheet-trigger"
+                            tabindex="0"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-palette size-4"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"
+                                ></path>
+                                <circle
+                                    cx="13.5"
+                                    cy="6.5"
+                                    r=".5"
+                                    fill="currentColor"
+                                ></circle>
+                                <circle
+                                    cx="17.5"
+                                    cy="10.5"
+                                    r=".5"
+                                    fill="currentColor"
+                                ></circle>
+                                <circle
+                                    cx="6.5"
+                                    cy="12.5"
+                                    r=".5"
+                                    fill="currentColor"
+                                ></circle>
+                                <circle
+                                    cx="8.5"
+                                    cy="7.5"
+                                    r=".5"
+                                    fill="currentColor"
+                                ></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <div
+                        data-orientation="vertical"
+                        role="none"
+                        data-slot="separator"
+                        class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px !h-8 max-lg:hidden"
+                    ></div>
+                    <div class="flex items-center gap-3 max-lg:hidden">
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://github.com/shadcnstudio/shadcn-studio"
+                            ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-github size-5"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                                ></path>
+                                <path d="M9 18c-4.51 2-5-2-7-2"></path></svg
+                            ><span class="sr-only">Github</span></a
+                        ><a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://x.com/ShadcnStudio"
+                            ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 24 24"
+                                class="size-5"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    d="M10.488 14.651L15.25 21h7l-7.858-10.478L20.93 3h-2.65l-5.117 5.886L8.75 3h-7l7.51 10.015L2.32 21h2.65zM16.25 19L5.75 5h2l10.5 14z"
+                                ></path></svg
+                            ><span class="sr-only">X</span></a
+                        ><a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://discord.com/invite/kBHkY7DekX"
+                            ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="1em"
+                                height="1em"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                class="size-5"
+                            >
+                                <circle
+                                    cx="9"
+                                    cy="12"
+                                    r="1"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></circle>
+                                <circle
+                                    cx="15"
+                                    cy="12"
+                                    r="1"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></circle>
+                                <path
+                                    d="M7.5 7.5C11 6.5 13 6.5 16.5 7.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                <path
+                                    d="M7 16.5C10.5 17.5 13.5 17.5 17 16.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                <path
+                                    d="M15.5 17C15.5 18 17 20 17.5 20C19 20 20.333 18.333 21 17C21.667 15.333 21.5 11.167 19.5 5.5C18.043 4.485 16.5 4.16 15 4L14 6.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                <path
+                                    d="M8.50011 17C8.50011 18 7.14411 20 6.66811 20C5.23911 20 3.97011 18.333 3.33511 17C2.70011 15.333 2.85911 11.167 4.76311 5.5C6.15111 4.485 7.54511 4.16 9.00011 4L10.0001 6.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path></svg
+                            ><span class="sr-only">Discord</span></a
+                        >
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border shadow-xs h-9 px-4 py-2 has-[&gt;svg]:px-3 max-sm:hidden"
+                            data-slot="button"
+                            data-variant="outline"
+                            data-size="default"
+                            href="/auth/login"
+                            >Sign in</a
+                        ><a
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border shadow-xs size-9 !hidden max-sm:!flex max-sm:items-center max-sm:justify-center"
+                            data-slot="button"
+                            data-variant="outline"
+                            data-size="icon"
+                            href="/auth/login"
+                            ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-log-in"
+                                aria-hidden="true"
+                            >
+                                <path d="m10 17 5-5-5-5"></path>
+                                <path d="M15 12H3"></path>
+                                <path
+                                    d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"
+                                ></path></svg
+                            ><span class="sr-only">Sign in</span></a
+                        ><a
+                            data-slot="button"
+                            data-variant="default"
+                            data-size="default"
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 gap-1 duration-300 [box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_20%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_var(--primary),0px_0px_0px_1.5px_color-mix(in_oklab,white_30%,transparent)_inset,0px_2px_2px_0px_color-mix(in_oklab,black_20%,transparent)] hover:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_40%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_color-mix(in_oklab,white_30%,transparent)_inset,0px_3px_4px_0px_color-mix(in_oklab,black_30%,transparent)] active:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_40%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_color-mix(in_oklab,white_30%,transparent)_inset,0px_3px_4px_0px_color-mix(in_oklab,black_30%,transparent)] focus-visible:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_40%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_color-mix(in_oklab,white_30%,transparent)_inset,0px_3px_4px_0px_color-mix(in_oklab,black_30%,transparent)] max-md:hidden"
+                            href="/theme-generator#pricing"
+                            >Get all access<svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 128 128"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="size-6"
+                            >
+                                <path
+                                    d="M63.6734 24.8486V49.3899C63.6734 57.4589 57.1322 64.0001 49.0632 64.0001H25.2041"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></path>
+                                <path
+                                    d="M64.3266 103.152L64.3266 78.6106C64.3266 70.5416 70.8678 64.0003 78.9368 64.0003L102.796 64.0004"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></path>
+                                <line
+                                    x1="93.3468"
+                                    y1="35.6108"
+                                    x2="76.555"
+                                    y2="52.205"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line>
+                                <line
+                                    x1="51.7697"
+                                    y1="77.0624"
+                                    x2="34.9778"
+                                    y2="93.6567"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line>
+                                <line
+                                    x1="50.9584"
+                                    y1="51.3189"
+                                    x2="34.2651"
+                                    y2="34.6256"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line>
+                                <line
+                                    x1="93.1625"
+                                    y1="93.6397"
+                                    x2="76.4692"
+                                    y2="76.9464"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line></svg></a
+                        ><a
+                            data-slot="button"
+                            data-variant="default"
+                            data-size="icon"
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-primary text-primary-foreground hover:bg-primary/90 size-9 gap-1 duration-300 [box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_20%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_var(--primary),0px_0px_0px_1.5px_color-mix(in_oklab,white_30%,transparent)_inset,0px_2px_2px_0px_color-mix(in_oklab,black_20%,transparent)] hover:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_40%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_color-mix(in_oklab,white_30%,transparent)_inset,0px_3px_4px_0px_color-mix(in_oklab,black_30%,transparent)] active:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_40%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_color-mix(in_oklab,white_30%,transparent)_inset,0px_3px_4px_0px_color-mix(in_oklab,black_30%,transparent)] focus-visible:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_40%,transparent)_inset,0px_0px_0px_1px_var(--primary),0px_0px_0px_1px_color-mix(in_oklab,white_30%,transparent)_inset,0px_3px_4px_0px_color-mix(in_oklab,black_30%,transparent)] md:hidden"
+                            href="/theme-generator#pricing"
+                            ><svg
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 128 128"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="size-6"
+                            >
+                                <path
+                                    d="M63.6734 24.8486V49.3899C63.6734 57.4589 57.1322 64.0001 49.0632 64.0001H25.2041"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></path>
+                                <path
+                                    d="M64.3266 103.152L64.3266 78.6106C64.3266 70.5416 70.8678 64.0003 78.9368 64.0003L102.796 64.0004"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></path>
+                                <line
+                                    x1="93.3468"
+                                    y1="35.6108"
+                                    x2="76.555"
+                                    y2="52.205"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line>
+                                <line
+                                    x1="51.7697"
+                                    y1="77.0624"
+                                    x2="34.9778"
+                                    y2="93.6567"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line>
+                                <line
+                                    x1="50.9584"
+                                    y1="51.3189"
+                                    x2="34.2651"
+                                    y2="34.6256"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line>
+                                <line
+                                    x1="93.1625"
+                                    y1="93.6397"
+                                    x2="76.4692"
+                                    y2="76.9464"
+                                    stroke="currentColor"
+                                    stroke-width="8.11681"
+                                ></line></svg
+                            ><span class="sr-only">Get all access</span></a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

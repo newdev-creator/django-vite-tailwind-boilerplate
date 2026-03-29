@@ -1,0 +1,218 @@
+<!-- cotton/calendar/script.html -->
+<!-- Inclus une seule fois grâce à Alpine x-ignore + un flag global -->
+
+<script>
+  if (!window.__calendarComponentRegistered) {
+    window.__calendarComponentRegistered = true;
+
+    function calendarComponent({ id, mode, locale, minDate, maxDate, defaultDate, captionLayout, showOutsideDays }) {
+      return {
+        id,
+        mode,
+        locale: locale || navigator.language || "en",
+        minDate: minDate ? new Date(minDate) : null,
+        maxDate: maxDate ? new Date(maxDate) : null,
+        captionLayout,
+        showOutsideDays,
+        viewDate: new Date(),
+        selectedDates: [],
+        rangeStart: null,
+        rangeEnd: null,
+        selectedValue: "",
+
+        init() {
+          const today = new Date();
+          this.viewDate = new Date(today.getFullYear(), today.getMonth(), 1);
+          if (defaultDate) {
+            const d = new Date(defaultDate);
+            if (!isNaN(d)) {
+              this.selectedDates = [d];
+              this.rangeStart = this.mode === "range" ? d : null;
+              this.viewDate = new Date(d.getFullYear(), d.getMonth(), 1);
+              this._syncValue();
+            }
+          }
+        },
+
+        // ── Navigation ──────────────────────────────────────────
+        prevMonth() {
+          const d = new Date(this.viewDate);
+          d.setMonth(d.getMonth() - 1);
+          this.viewDate = d;
+        },
+        nextMonth() {
+          const d = new Date(this.viewDate);
+          d.setMonth(d.getMonth() + 1);
+          this.viewDate = d;
+        },
+        setMonth(month) {
+          const d = new Date(this.viewDate);
+          d.setMonth(parseInt(month));
+          this.viewDate = d;
+        },
+        setYear(year) {
+          const d = new Date(this.viewDate);
+          d.setFullYear(parseInt(year));
+          this.viewDate = d;
+        },
+        isPrevDisabled() {
+          if (!this.minDate) return false;
+          const prev = new Date(this.viewDate);
+          prev.setMonth(prev.getMonth() - 1);
+          const lastDay = new Date(prev.getFullYear(), prev.getMonth() + 1, 0);
+          return lastDay < this.minDate;
+        },
+        isNextDisabled() {
+          if (!this.maxDate) return false;
+          const next = new Date(this.viewDate);
+          next.setMonth(next.getMonth() + 1);
+          return new Date(next.getFullYear(), next.getMonth(), 1) > this.maxDate;
+        },
+
+        // ── Labels ──────────────────────────────────────────────
+        currentMonthLabel() {
+          return this.viewDate.toLocaleString(this.locale, { month: "long", year: "numeric" });
+        },
+        currentMonthShort() {
+          return this.viewDate.toLocaleString(this.locale, { month: "short" });
+        },
+        monthNames() {
+          return Array.from({ length: 12 }, (_, i) =>
+            new Date(2000, i, 1).toLocaleString(this.locale, { month: "short" })
+          );
+        },
+        yearRange() {
+          const base = this.viewDate.getFullYear();
+          return Array.from({ length: 21 }, (_, i) => base - 10 + i);
+        },
+        weekdayNames() {
+          const baseMonday = new Date(2024, 0, 1);
+          return Array.from({ length: 7 }, (_, i) => {
+            const d = new Date(baseMonday);
+            d.setDate(d.getDate() + i);
+            return d.toLocaleString(this.locale, { weekday: "short" }).slice(0, 2);
+          });
+        },
+
+        // ── Grid ────────────────────────────────────────────────
+        calendarWeeks() {
+          const year = this.viewDate.getFullYear();
+          const month = this.viewDate.getMonth();
+          const firstDay = new Date(year, month, 1);
+          const lastDay = new Date(year, month + 1, 0);
+          let startDow = firstDay.getDay() - 1;
+          if (startDow < 0) startDow = 6;
+          const weeks = [];
+          let week = [];
+          for (let i = 0; i < startDow; i++) {
+            const d = new Date(year, month, 1 - (startDow - i));
+            week.push(this.showOutsideDays ? d : null);
+          }
+          for (let d = 1; d <= lastDay.getDate(); d++) {
+            week.push(new Date(year, month, d));
+            if (week.length === 7) { weeks.push(week); week = []; }
+          }
+          if (week.length > 0) {
+            let t = 1;
+            while (week.length < 7) {
+              week.push(this.showOutsideDays ? new Date(year, month + 1, t++) : null);
+            }
+            weeks.push(week);
+          }
+          return weeks;
+        },
+
+        // ── Selection ────────────────────────────────────────────
+        selectDay(day) {
+          if (!day || this.isDisabled(day)) return;
+          if (this.mode === "single") {
+            this.selectedDates = [day];
+          } else if (this.mode === "range") {
+            if (!this.rangeStart || (this.rangeStart && this.rangeEnd)) {
+              this.rangeStart = day;
+              this.rangeEnd = null;
+              this.selectedDates = [day];
+            } else {
+              if (day < this.rangeStart) {
+                this.rangeEnd = this.rangeStart;
+                this.rangeStart = day;
+              } else {
+                this.rangeEnd = day;
+              }
+              this.selectedDates = [this.rangeStart, this.rangeEnd];
+            }
+          } else if (this.mode === "multiple") {
+            const idx = this.selectedDates.findIndex(d => this._sameDay(d, day));
+            if (idx >= 0) this.selectedDates.splice(idx, 1);
+            else this.selectedDates.push(day);
+          }
+          this._syncValue();
+        },
+        _syncValue() {
+          if (this.mode === "range" && this.rangeStart && this.rangeEnd) {
+            this.selectedValue = `${this._fmt(this.rangeStart)} to ${this._fmt(this.rangeEnd)}`;
+          } else {
+            this.selectedValue = this.selectedDates.map(d => this._fmt(d)).join(",");
+          }
+          this.$el.dispatchEvent(new CustomEvent("calendar:change", {
+            bubbles: true,
+            detail: { dates: this.selectedDates, value: this.selectedValue, mode: this.mode }
+          }));
+        },
+
+        // ── Predicates ───────────────────────────────────────────
+        isSelected(day) { return !!day && this.selectedDates.some(d => this._sameDay(d, day)); },
+        isSelectedSingle(day) { return this.mode === "single" && this.isSelected(day); },
+        isRangeStart(day) { return this.mode === "range" && !!this.rangeStart && this._sameDay(day, this.rangeStart); },
+        isRangeEnd(day) { return this.mode === "range" && !!this.rangeEnd && this._sameDay(day, this.rangeEnd); },
+        isRangeMiddle(day) {
+          return this.mode === "range" && !!this.rangeStart && !!this.rangeEnd && !!day && day > this.rangeStart && day < this.rangeEnd;
+        },
+        isToday(day) { return !!day && this._sameDay(day, new Date()); },
+        isOutside(day) { return !!day && day.getMonth() !== this.viewDate.getMonth(); },
+        isDisabled(day) {
+          if (!day) return true;
+          if (this.minDate && day < this.minDate) return true;
+          if (this.maxDate && day > this.maxDate) return true;
+          return false;
+        },
+
+        // ── Classes ──────────────────────────────────────────────
+        tdClass(day) {
+          if (!day) return "";
+          const c = [];
+          if (this.isRangeStart(day)) c.push("relative isolate z-0 rounded-l-[var(--cell-radius)] bg-muted after:absolute after:inset-y-0 after:right-0 after:w-4 after:bg-muted");
+          if (this.isRangeEnd(day)) c.push("relative isolate z-0 rounded-r-[var(--cell-radius)] bg-muted after:absolute after:inset-y-0 after:left-0 after:w-4 after:bg-muted");
+          if (this.isRangeMiddle(day)) c.push("rounded-none");
+          if (this.isToday(day) && !this.isSelected(day)) c.push("rounded-[var(--cell-radius)] bg-muted text-foreground");
+          if (this.isOutside(day)) c.push("text-muted-foreground");
+          return c.join(" ");
+        },
+        btnClass(day) {
+          if (!day) return "";
+          const c = ["relative isolate z-10 flex aspect-square w-full min-w-[var(--cell-size)] items-center justify-center rounded-[var(--cell-radius)] border-0 text-sm leading-none font-normal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"];
+          if (this.isSelectedSingle(day)) c.push("bg-primary text-primary-foreground hover:bg-primary/90");
+          else if (this.isRangeStart(day) || this.isRangeEnd(day)) c.push("bg-primary text-primary-foreground hover:bg-primary/90");
+          else if (this.isRangeMiddle(day)) c.push("rounded-none bg-muted text-foreground hover:bg-accent");
+          else if (this.isDisabled(day)) c.push("text-muted-foreground opacity-50 pointer-events-none");
+          else if (this.isOutside(day)) c.push("text-muted-foreground hover:bg-accent hover:text-accent-foreground");
+          else c.push("hover:bg-accent hover:text-accent-foreground");
+          return c.join(" ");
+        },
+
+        // ── Utils ────────────────────────────────────────────────
+        _sameDay(a, b) {
+          return !!a && !!b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+        },
+        _fmt(date) {
+          if (!date) return "";
+          return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
+        },
+      };
+    }
+
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("calendarComponent", calendarComponent);
+    });
+  }
+</script>

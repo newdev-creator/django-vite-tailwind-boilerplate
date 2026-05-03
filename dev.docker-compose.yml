@@ -1,0 +1,35 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    container_name: photodrive-dev
+    environment:
+      - DEBUG=True
+      - DATABASE_URL=sqlite:////app/db.sqlite3
+      - ALLOWED_HOST=localhost,127.0.0.1
+      - CSRF_TRUSTED_ORIGINS=http://localhost:8000
+    volumes:
+      - .:/app # hot-reload Django (tout le code est monté)
+      - /app/.venv # exclure le venv du mount
+      - /app/node_modules # exclure node_modules du mount
+    ports:
+      - "8000:8000" # Django
+    command: >
+      sh -c ".venv/bin/python manage.py migrate &&
+             .venv/bin/python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      vite:
+        condition: service_started
+
+  vite:
+    build:
+      context: .
+      dockerfile: dev.vite.Dockerfile
+    container_name: photodrive-vite
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    command: pnpm run dev --host

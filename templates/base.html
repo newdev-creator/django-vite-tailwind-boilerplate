@@ -1,18 +1,20 @@
 {% load django_vite %}
 <!doctype html>
-<html lang="en">
+<html lang="fr" data-theme="cupcake">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
             {% block title %}Getting Started with Django and Vite{% endblock %}
         </title>
-        {% vite_hmr_client %}
-        <link rel="stylesheet" href="{% vite_asset_url 'assets/style.css' %}" />
-        <c-navbar />
-        {% block extra_head %}{% endblock %}
+        {% if debug %}
+            {% vite_hmr_client %}
+        {% endif %}
+        {% vite_asset 'assets/style.css' %}
+        {% vite_asset 'assets/main.js' %}
+        {% block extra_head %}{% endblock extra_head %}
     </head>
-    <body>
-        {% block content %}{% endblock %}
+    <body class="bg-base-100 min-h-screen text-base-content" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        {% block content %}{% endblock content %}
     </body>
 </html>

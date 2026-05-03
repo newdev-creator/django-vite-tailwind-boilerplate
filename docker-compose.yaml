@@ -1,0 +1,35 @@
+services:
+  web:
+    build: .
+    image: photodrive-web
+    container_name: photodrive-app
+    restart: always
+    environment:
+      - DEBUG=False
+      - DATABASE_URL=${DATABASE_URL:-sqlite:///app/db.sqlite3}
+      - ALLOWED_HOST=${ALLOWED_HOST:-*}
+      - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-http://localhost}
+      - PORT=8000
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+      - db_data:/app/data
+    expose:
+      - "8000"          # plus de ports: ici, Nginx prend le relais
+
+  nginx:
+    build: ./nginx
+    container_name: photodrive-nginx
+    restart: always
+    volumes:
+      - static_volume:/app/staticfiles:ro
+      - media_volume:/app/media:ro
+    ports:
+      - "8001:80"       # Coolify redirige vers ce port
+    depends_on:
+      - web
+
+volumes:
+  static_volume:
+  media_volume:
+  db_data:

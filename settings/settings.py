@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "django_cotton",
+    "imagekit",
+    "lucide",
 ]
 
 if DEBUG:
@@ -82,6 +84,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
@@ -97,10 +100,7 @@ WSGI_APPLICATION = "settings.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": env.db("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 }
 
 
@@ -145,6 +145,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 STORAGES = {
@@ -161,6 +164,54 @@ AUTHENTICATION_BACKENDS = [
 DJANGO_VITE = {
     "default": {
         "dev_mode": DEBUG,
-        "manifest_path": BASE_DIR / "static" / "manifest.json",
+        "manifest_path": BASE_DIR / "static" / ".vite" / "manifest.json",
     }
+}
+
+# ================================
+# 📚 Logging
+# ================================
+# Create logs directory if it doesn't exist
+LOGS_DIR = BASE_DIR / "logs"
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[{asctime}] {levelname} {name} {module}:{lineno} - {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "daily_file": {
+            "level": "INFO",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": LOGS_DIR / "app.log",
+            "when": "midnight",  # rotation quotidienne
+            "backupCount": 90,  # conservation 90 jours
+            "encoding": "utf-8",
+            "formatter": "verbose",
+        },
+        # (optionnel) affichage console pendant le dev
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        # Logger principal de votre appli
+        "": {  # '' = racine → tout le projet
+            "handlers": ["daily_file", "console"],
+            "level": "INFO",
+            "propagate": False,  # évite les doublons
+        },
+        # Logger spécifique pour Django si besoin
+        "django": {
+            "handlers": ["daily_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
 }

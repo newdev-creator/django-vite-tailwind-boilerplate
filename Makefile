@@ -1,5 +1,5 @@
 # ==============================================================================
-# PhotoDrive — Makefile
+# BoilerPlat — Makefile
 # ==============================================================================
 
 .PHONY: help dev dev-build dev-down dev-logs dev-ps dev-shell \
@@ -10,7 +10,7 @@
 # Affiche l'aide par défaut
 help:
 	@echo ""
-	@echo "  PhotoDrive — Commandes disponibles"
+	@echo "  BoilerPlat — Commandes disponibles"
 	@echo "  ─────────────────────────────────────────────────────"
 	@echo ""
 	@echo "  DEV"
@@ -60,7 +60,7 @@ dev-ps:
 	docker compose -f dev.docker-compose.yml ps
 
 dev-shell:
-	docker exec -it photodrive-dev bash
+	docker exec -it BoilerPlat-dev bash
 
 # ==============================================================================
 # PROD
@@ -83,29 +83,29 @@ prod-logs:
 # ==============================================================================
 
 migrate:
-	docker exec photodrive-dev .venv/bin/python manage.py migrate
+	docker exec BoilerPlat-dev .venv/bin/python manage.py migrate
 
 mm:
-	docker exec photodrive-dev .venv/bin/python manage.py makemigrations $(app)
+	docker exec BoilerPlat-dev .venv/bin/python manage.py makemigrations $(app)
 
 superuser:
-	docker exec -it photodrive-dev .venv/bin/python manage.py createsuperuser
+	docker exec -it BoilerPlat-dev .venv/bin/python manage.py createsuperuser
 
 shell:
-	docker exec -it photodrive-dev .venv/bin/python manage.py shell
+	docker exec -it BoilerPlat-dev .venv/bin/python manage.py shell
 
 collectstatic:
-	docker exec photodrive-dev .venv/bin/python manage.py collectstatic --noinput
+	docker exec BoilerPlat-dev .venv/bin/python manage.py collectstatic --noinput
 
 # ==============================================================================
 # QUALITÉ
 # ==============================================================================
 
 lint:
-	docker exec photodrive-dev .venv/bin/ruff check .
+	docker exec BoilerPlat-dev .venv/bin/ruff check .
 
 format:
-	docker exec photodrive-dev .venv/bin/ruff format .
+	docker exec BoilerPlat-dev .venv/bin/ruff format .
 
 test:
-	docker exec photodrive-dev .venv/bin/python manage.py test apps.accounts apps.files apps.folders
+	docker exec BoilerPlat-dev .venv/bin/python manage.py test apps.accounts apps.files apps.folders

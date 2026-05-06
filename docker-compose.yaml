@@ -1,8 +1,8 @@
 services:
   web:
     build: .
-    image: photodrive-web
-    container_name: photodrive-app
+    image: BoilerPlat-web
+    container_name: BoilerPlat-app
     restart: always
     environment:
       - DEBUG=False
@@ -19,7 +19,7 @@ services:
 
   nginx:
     build: ./nginx
-    container_name: photodrive-nginx
+    container_name: BoilerPlat-nginx
     restart: always
     volumes:
       - static_volume:/app/staticfiles:ro
